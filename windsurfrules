@@ -1,0 +1,55 @@
+# Windsurf Rules for Product Management Application
+
+## Project Structure
+- This is a Flask-based product management application
+- Main application code is in `src/main/python/`
+- Tests are located in `src/unittest/python/`
+- Static files (CSS, JS) are in `src/main/python/static/`
+- Templates are in `src/main/python/templates/`
+
+## Code Style Guidelines
+- Follow PEP 8 for Python code formatting
+- Use meaningful variable and function names
+- Add docstrings to all functions and classes
+- Keep functions small and focused on single responsibility
+
+## Development Practices
+- Always run tests before committing changes
+- Use virtual environment for dependency management
+- Update requirements.txt when adding new dependencies
+- Follow semantic versioning for releases
+
+## File Naming Conventions
+- Python files: snake_case.py
+- HTML templates: kebab-case.html
+- CSS files: kebab-case.css
+- JavaScript files: camelCase.js
+
+## Database
+- Use SQLite for development
+- All database models should be in models.py
+- Use migrations for schema changes
+
+## API Guidelines
+- RESTful API design
+- Consistent JSON response format
+- Proper HTTP status codes
+- Input validation for all endpoints
+
+## Security
+- Never commit sensitive data (API keys, passwords)
+- Use environment variables for configuration
+- Validate and sanitize all user inputs
+- Implement proper authentication and authorization
+
+## Testing
+- Write unit tests for all business logic
+- Use pytest for testing framework
+- Maintain test coverage above 80%
+- Mock external dependencies in tests
+
+## Documentation
+- Keep README.md updated
+- Document API endpoints
+- Add inline comments for complex logic
+- Update changelog for releases
