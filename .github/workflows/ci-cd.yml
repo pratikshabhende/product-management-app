@@ -39,8 +39,7 @@ jobs:
         pyb install_dependencies
         
     - name: Run unit tests
-      run: |
-        pyb run_unit_tests
+      run: pyb run_unit_tests
         
     - name: Upload test reports
       uses: actions/upload-artifact@v4
@@ -53,8 +52,7 @@ jobs:
         retention-days: 30
         
     - name: Run code coverage
-      run: |
-        pyb coverage
+      run: pyb coverage
         
     - name: Upload code coverage reports
       uses: actions/upload-artifact@v4
@@ -74,21 +72,29 @@ jobs:
         name: codecov-umbrella
         fail_ci_if_error: false
         
+    - name: SonarQube Scan
+      uses: sonarqube/sonarqube-scan-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        
+    - name: SonarQube Quality Gate Check
+      uses: sonarqube/sonarqube-quality-gate-action@master
+      timeout-minutes: 5
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        
     - name: Create build artifact
-      run: |
-        pyb publish
+      run: pyb publish
         
     - name: Install security tools
-      run: |
-        pip install bandit safety
+      run: pip install bandit safety
         
     - name: Run Bandit security scan
-      run: |
-        bandit -r src/ -f json -o bandit-report.json || true
+      run: bandit -r src/ -f json -o bandit-report.json || true
         
     - name: Run Safety check
-      run: |
-        safety check --json --output safety-report.json || true
+      run: safety check --json --output safety-report.json || true
         
     - name: Upload security reports
       uses: actions/upload-artifact@v4
@@ -114,18 +120,5 @@ jobs:
       if: github.ref == 'refs/heads/master'
       with:
         name: production-artifacts
-        path: |
-          target/dist/
+        path: target/dist/
         retention-days: 365
-        
-    - name: Display artifact structure
-      if: github.ref == 'refs/heads/master'
-      run: |
-        ls -la ./target/dist/
-        
-    # Add deployment steps here based on your deployment target
-    # Examples:
-    # - Deploy to AWS, Azure, GCP
-    # - Deploy to Docker registry
-    # - Deploy to PyPI
-    # - Deploy to staging/production servers
