@@ -43,7 +43,7 @@ jobs:
         pyb run_unit_tests
         
     - name: Upload test reports
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: test-reports
@@ -57,7 +57,7 @@ jobs:
         pyb coverage
         
     - name: Upload code coverage reports
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: coverage-reports
@@ -91,7 +91,7 @@ jobs:
         safety check --json --output safety-report.json || true
         
     - name: Upload security reports
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: security-reports
@@ -101,7 +101,7 @@ jobs:
         retention-days: 30
         
     - name: Upload build artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: build-artifacts
         path: |
@@ -110,7 +110,7 @@ jobs:
         retention-days: 90
         
     - name: Archive production artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: github.ref == 'refs/heads/master'
       with:
         name: production-artifacts
